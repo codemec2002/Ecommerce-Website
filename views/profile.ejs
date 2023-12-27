@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile</title>
+  <link rel="stylesheet" href="/style/profile.css">
+</head>
+<body>
+  <div class="profile-container">
+    <h1>User Profile</h1>
+    <div>
+      <% if (userData && userData.name) { %>
+        <p>Name: <%= userData.name %></p>
+      <% } %>
+      <% if (userData && userData.email) { %>
+        <p>Email: <%= userData.email %></p>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

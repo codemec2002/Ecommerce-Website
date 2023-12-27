@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.site-header {
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+}
+
+.logo {
+    flex: 1;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+form {
+    display: flex;
+    align-items: center;
+}
+
+.input {
+    padding: 8px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 8px 12px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.no-dropdown {
+    display: flex;
+}
+
+.no-dropdown form {
+    margin-right: 10px;
+}
+
+.dropdown {
+    display: none;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+@media screen and (max-width: 650px) {
+    .no-dropdown {
+        display: none;
+    }
+
+    .dropdown {
+        display: block;
+    }
+}
+
+.category-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: #fff;
+    margin: 20px 10%;
+}
+
+.category {
+    text-align: center;
+    padding: 10px;
+}
+
+.category-image {
+    width: 100%; /* Make the images fill the container */
+    max-width: 100px; /* Set a maximum width to ensure responsiveness */
+    height: auto; /* Maintain aspect ratio */
+    /* border-radius: 50%; Make the images circular */
+}
+
+/* Add media query for responsiveness */
+@media only screen and (max-width: 600px) {
+    .category-container {
+        flex-direction: column; /* Stack items vertically on small screens */
+    }
+}
+
