@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>User Profile</title>
-  <link rel="stylesheet" href="/style/profile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/profile.css">
+    <title>Document</title>
 </head>
 <body>
-  <div class="profile-container">
-    <h1>User Profile</h1>
-    <div>
-      <% if (userData && userData.name) { %>
-        <p>Name: <%= userData.name %></p>
-      <% } %>
-      <% if (userData && userData.email) { %>
-        <p>Email: <%= userData.email %></p>
-      <% } %>
+    <div><h1>Hello User</h1></div>
+    <div class="container">
+        <section>
+            <div class="user-data">
+                <p class="user-details">Name: <%= name %></p>
+                <p class="user-details">Email: <%= email %></p>
+                <a href="">Edit</a> <!--redirect to edit info page--> 
+            </div>
+        </section>
+        <section>
+            <div class="product-profile">
+                if(locals.isSeller=="true") {
+                    <button>My products</button>
+                }
+                <button>Orders</button>
+                <button>Wishlist</button>
+                <button>Manage Address</button>
+            </div>
+        </section>
     </div>
-  </div>
 </body>
 </html>
