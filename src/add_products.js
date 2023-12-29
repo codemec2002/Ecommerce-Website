@@ -19,7 +19,7 @@ const addProducts_post = async(req,res)=> {
     var quantity=req.body.quantity;
     var brand=req.body.brand;
     var category=req.body.category;
-    var product_image = req.body.product_image;
+    var product_image = req.file.filename;
     if(product_name && price && quantity && brand && category && product_image) {
         if(category=="other") {
             if(req.body.otherCategory) {
@@ -40,6 +40,7 @@ const addProducts_post = async(req,res)=> {
             quantity:quantity,
             productImage: product_image
         });
+        console.log(product_image);
         const product_res=await newProduct.save();
 
         var category_res = await categorySchema.findOne({category:category});

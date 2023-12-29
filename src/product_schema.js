@@ -17,7 +17,7 @@ const productsSchema = mongoose.Schema({
     quantity: Number,
     productImage: Buffer
 });
-productsSchema.index({id:1});
+productsSchema.index({"name":"text"});
 const products = mongoose.model("products",productsSchema);
 
 export default products;
