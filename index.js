@@ -19,6 +19,7 @@ import homeRoute from "./src/home.js";
 import * as becomeSeller from "./src/become_seller.js";
 import * as addProduts from "./src/add_products.js";
 import profile from "./src/profile.js";
+import categoryProduct from "./src/category_products.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -74,6 +75,8 @@ app.get("/add_products",addProduts.addProducts_get);
 app.post("/add_products",upload.single('product_image'),addProduts.addProducts_post);
 
 app.get("/profile", profile);
+
+app.get("/category",categoryProduct);
 
 app.post("/search",)
 
