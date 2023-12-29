@@ -110,4 +110,35 @@ form {
         flex-direction: column; /* Stack items vertically on small screens */
     }
 }
+.this-category-container {
+    margin-bottom: 20px;
+    background-color: #fff;
+    margin: 0 10%;
+    padding: 20px;
+}
 
+.this-category-name {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-card {
+    display: inline-block;
+    margin-right: 15px; /* Increased margin for spacing between product cards */
+    text-align: center;
+    padding: 10px; /* Added padding for a bit more space inside the card */
+    border: 1px solid #ccc; /* Added a border to the product card */
+    border-radius: 8px;
+}
+
+.card-image {
+    width: 170px; /* Increased width for the product image */
+    height: 170px; /* Increased height for the product image */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-card p {
+    margin: 8px 0; /* Adjusted margin for paragraphs inside the product card */
+}

@@ -1,0 +1,19 @@
+<div>
+    <% categories.forEach(category => { %>
+        <!-- render a page which will display few objects of a category -->
+        <div class="this-category-container">
+            <h1 class="this-category-name"> <%= category.category %> </h1>
+            <% category.category_wise_name.forEach((product,name) => { %>
+                <!-- display the product in a div  -->
+                    <!-- we can access products of that particular id using name_products.id -->
+                    <%= console.log("name : ",name); %>
+                    <%= console.log("poduct name: ",product); %>
+                    <div class="product-card">
+                        <img src="images/download.jpeg" alt="sugar image" class="card-image">
+                        <p> <%= name %> </p>
+                        <p> <%= product[0].name %> </p>
+                    </div>
+            <% }); %>
+        </div>
+    <% }); %>
+</div>
