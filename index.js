@@ -2,6 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import session from "cookie-session";
 import cookieParser from "cookie-parser";
+import fs from "fs";
+import multer from "multer";
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -17,6 +19,7 @@ import homeRoute from "./src/home.js";
 import * as becomeSeller from "./src/become_seller.js";
 import * as addProduts from "./src/add_products.js";
 import profile from "./src/profile.js";
+import categoryProduct from "./src/category_products.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -32,6 +35,23 @@ app.use(session({
   cookie:{maxAge:3600000*1},
   email:"email"
 }));
+
+// for uploading image files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // Specify the directory where you want to save the uploaded files
+    // cb(null, 'uploads/');
+    fs.mkdir('./public/uploads/',(err)=>{
+      cb(null, './public/uploads/');
+   });
+  },
+  filename: (req, file, cb) => {
+    // Create a unique filename for the uploaded file
+    cb(null, Date.now() + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
 
 app.get("/",loginRoute.login_get);
 app.post("/",loginRoute.login_post);
@@ -52,9 +72,13 @@ app.get("/become_seller",becomeSeller.sellerSignUp_get);
 app.post("/become_seller",becomeSeller.sellerSignUp_post);
 
 app.get("/add_products",addProduts.addProducts_get);
-app.post("/add_products",addProduts.addProducts_post);
+app.post("/add_products",upload.single('product_image'),addProduts.addProducts_post);
 
 app.get("/profile", profile);
+
+app.get("/category",categoryProduct);
+
+app.post("/search",)
 
 app.listen(port,function(){
     console.log(`Server started on port ${port}`);

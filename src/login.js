@@ -3,7 +3,8 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import user from "./schema.js"
-import seller from "./seller_schema.js"
+import seller from "./seller_schema.js";
+import category_wise_name from "./get_category_name.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -29,11 +30,13 @@ const login_post = async(req,res)=> {
             if(is_Seller) {
                 res.render("home.ejs",{
                     msg: "isSeller",
+                    categories: category_wise_name,
                 });
             }
             else {
                 res.render("home.ejs",{
                     msg : "not_seller",
+                    categories: category_wise_name,
                 });
             }
         }

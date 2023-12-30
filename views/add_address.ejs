@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/add_address.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add address</h1>
+    <form action="/add_address" method="post">
+        <input type="text" name="name" placeholder="Name" class="input" required>
+        <input type="number" name="mobileNumber" placeholder="10-digit mobile Number" class="input" required>
+        <input type="number" name="pinCode" placeholder="Pincode" class="input" required>
+        <input type="text" name="address" placeholder="Address" class="input" required>
+        <input type="text" name="landmark" placeholder="Lnadmark" class="input" required>
+        <input type="text" name="city" placeholder="City" class="input" required>
+        <input type="text" name="state" placeholder="State" class="input" required>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
