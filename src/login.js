@@ -40,6 +40,7 @@ const login_post = async(req,res)=> {
                 });
             }
         }
+        
         else {
             res.render("login.ejs",{
                 passCheck: "Invalid Credentials",

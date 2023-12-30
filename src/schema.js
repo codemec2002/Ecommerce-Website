@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 import pkg from 'validator';
 
 const {isEmail} = pkg;
-mongoose.connect("mongodb://localhost:27017/ecommerce");
-// mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/");
+// mongoose.connect("mongodb://localhost:27017/ecommerce");
+mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/");
 var userDataSchema= new mongoose.Schema({
     name: String,
     email: {
