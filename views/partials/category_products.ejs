@@ -1,0 +1,12 @@
+<!-- render a page which will display all objects of a category -->
+<div class="this-category-container">
+    <h1 class="this-category-name"> <%= categoryName %> </h1>
+    <% products.forEach(product => { %>
+        <!-- display the product in a div  -->
+            <!-- we can access products of that particular id using name_products.id -->
+            <div class="product-card">
+                <img src="uploads/<%= product.productImage.toString()%>" alt="Image" class="card-image">
+                <p> <%= product.name %> </p>
+            </div>
+    <% }); %>
+</div>

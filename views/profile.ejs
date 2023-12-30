@@ -18,12 +18,23 @@
         </section>
         <section>
             <div class="product-profile">
-                if(locals.isSeller=="true") {
-                    <button>My products</button>
-                }
-                <button>Orders</button>
-                <button>Wishlist</button>
-                <button>Manage Address</button>
+                <% if(locals.isSeller=="true") { %>
+                    <form action="/seller_product">
+                        <button>My products</button>
+                    </form>
+                    <form action="/sold_products" method="get">
+                        <button>Sold Products</button>
+                    </form>
+                <% } %>
+                <form action="/orders" method="get">
+                    <button>Orders</button>
+                </form>
+                <form action="/wish_list" method="get">
+                    <button>Wishlist</button>
+                </form>
+                <form action="/manage_address" method="get">
+                    <button>Manage Address</button>
+                </form>
             </div>
         </section>
     </div>
