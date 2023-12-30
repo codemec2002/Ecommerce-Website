@@ -20,6 +20,7 @@ import * as becomeSeller from "./src/become_seller.js";
 import * as addProduts from "./src/add_products.js";
 import profile from "./src/profile.js";
 import categoryProduct from "./src/category_products.js";
+import search from "./src/search.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -78,7 +79,7 @@ app.get("/profile", profile);
 
 app.get("/category",categoryProduct);
 
-app.post("/search",)
+app.post("/search", search);
 
 app.listen(port,function(){
     console.log(`Server started on port ${port}`);

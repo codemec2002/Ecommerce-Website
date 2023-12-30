@@ -31,29 +31,43 @@ const addProducts_post = async(req,res)=> {
                 });
             }
         }
-        const newProduct = new products({
+        const existingProduct = await products.findOne({
             name: product_name,
             brand: brand,
-            category: category,
-            seller_email:req.session.userData.email,
-            price:price,
-            quantity:quantity,
-            productImage: product_image
+            seller_email: req.session.userData.email,
         });
-        console.log(product_image);
-        const product_res=await newProduct.save();
-
-        var category_res = await categorySchema.findOne({category:category});
-        if(category_res) {
-            category_res.products.push({product:product_res._id});
+    
+        if (existingProduct) {
+            // If the product already exists for the seller, update its quantity
+            existingProduct.quantity += parseInt(quantity, 10);
+            await existingProduct.save();
+            res.send("Product already Present so quantity updated successfully");
         } else {
-            category_res = new categorySchema({
+            const newProduct = new products({
+                name: product_name,
+                brand: brand,
                 category: category,
-                products: [{product:product_res._id}]
+                seller_email:req.session.userData.email,
+                price:price,
+                quantity:quantity,
+                productImage: product_image
             });
+            console.log(product_image);
+            const product_res=await newProduct.save();
+        
+
+            var category_res = await categorySchema.findOne({category:category});
+            if(category_res) {
+                category_res.products.push({product:product_res._id});
+            } else {
+                category_res = new categorySchema({
+                    category: category,
+                    products: [{product:product_res._id}]
+                });
+            }
+            await category_res.save();
+            res.send("successfully added");
         }
-        await category_res.save();
-        res.send("successfully added");
     }
     else {
         res.render("add_products.ejs",{
