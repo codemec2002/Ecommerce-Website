@@ -42,5 +42,5 @@ const category_wise_name_promise = category_collection.map(async (e)=> {
 // await final();
 // console.log(category_wise_name_promise);
 var category_wise_name= await Promise.all(category_wise_name_promise);
-console.log(category_wise_name);
+// console.log(category_wise_name);
 export default category_wise_name;
