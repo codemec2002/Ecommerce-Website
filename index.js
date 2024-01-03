@@ -21,6 +21,7 @@ import * as addProduts from "./src/add_products.js";
 import profile from "./src/profile.js";
 import categoryProduct from "./src/category_products.js";
 import search from "./src/search.js";
+import name_wise_product from "./src/get_name_wise_product.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -80,6 +81,8 @@ app.get("/profile", profile);
 app.get("/category",categoryProduct);
 
 app.post("/search", search);
+
+app.get("/:category/:name",name_wise_product);
 
 app.listen(port,function(){
     console.log(`Server started on port ${port}`);
