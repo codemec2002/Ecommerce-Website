@@ -10,11 +10,10 @@ const app = express();
 app.set('views', path.join(__dirname, '../views'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-
 const search = async(req, res) => {
     try {
         const queryProductName = req.body.name;
-        const allProducts = await products.find();
+        // const allProducts = await products.find();
         // console.log(allProducts);
         // console.log(queryProductName);
         const productArray = await products.find({ name: queryProductName });
