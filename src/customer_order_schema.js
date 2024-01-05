@@ -16,6 +16,6 @@ const customer_order_schema = mongoose.Schema({
     }]
 });
 cart_schema.index({userEmail:1});
-const cartSchema = mongoose.model("cartSchema",cart_schema);
+const customerOrderSchema = mongoose.model("customerOrderSchema", customerOrderSchema);
 
-export default cartSchema;  
+export default customerOrderSchema;  
