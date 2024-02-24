@@ -7,22 +7,23 @@
 <body>
     <h1>Shopping Cart</h1>
     <div class="cart-items">
-        <% cartList.forEach(product => { %>
-            <div class="product-row">
-                <div class="product-details">
-                    <h2><%= product.name %></h2>
-                    <p>Price: <%= product.price %></p>
-                    <p>Quantity available: <%= product.quantity %></p>
-                    <p>Seller Email: <%= product.seller_email %></p>
-                    <div class="quantity-controls">
-                        <button class="decrease-quantity">-</button>
-                        <span class="quantity-added">0</span>
-                        <button class="increase-quantity">+</button>
+        <% if (locals.cartList) { %> 
+            <% cartList.forEach(product => { %>
+                <div class="product-row">
+                    <div class="product-details">
+                        <h2><%= product.name %></h2>
+                        <p>Price: <%= product.price %></p>
+                        <p>Quantity available: <%= product.quantity %></p>
+                        <p>Seller Email: <%= product.seller_email %></p>
+                        <div class="quantity-controls">
+                            <button class="decrease-quantity">-</button>
+                            <span class="quantity-added">0</span>
+                            <button class="increase-quantity">+</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-        <% }); %>
+            <% }); %>
+        <% } %>
     </div>
     <button class="proceed-to-buy">Proceed to Buy</button>
 </body>
