@@ -2,6 +2,7 @@
     import { fileURLToPath } from 'url';
     import path, { dirname } from 'path';
     import cartSchema from "./cart_schema.js";
+import { log } from "console";
 
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename);
@@ -16,8 +17,9 @@
             var id = Product._id;
             var session_mail = req.session.userData.email;
             var cart_res=await cartSchema.findOne({userEmail:session_mail});
+            console.log(id);
             if(cart_res) {
-                cart_res.products.push(id);
+                cart_res.products.push({ product: id }); // added product id as object
             } else {
                 cart_res = new cartSchema({
                     userEmail: session_mail,
