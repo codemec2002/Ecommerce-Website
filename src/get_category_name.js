@@ -10,6 +10,7 @@ const app=express();
 app.set('views',path.join(__dirname, '../views'));
 const category_collection = await category.find();
 
+// console.log(category_collection);
 const category_wise_name_promise = category_collection.map(async (e)=> {
     const category_name = new Map();
     for(var i=0;i<e.products.length;i++) {

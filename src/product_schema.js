@@ -3,8 +3,8 @@ import mongoose, { Schema } from "mongoose";
 import pkg from 'validator';
 
 const {isEmail} = pkg;
-mongoose.connect("mongodb://localhost:27017/ecommerce");
-// mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/");
+// mongoose.connect("mongodb://localhost:27017/ecommerce");
+mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/");
 
 // we can increase the id by 1 for each entry in the database
 const productsSchema = mongoose.Schema({
