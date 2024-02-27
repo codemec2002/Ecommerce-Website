@@ -29,7 +29,7 @@ const go_to_cart = async (req, res) => {
                 cartList:cart_list,
             });
         } else {
-            return res.send("NO MATCH");
+            return res.send("NO Match");
         }
     } catch (error) {
         console.error(error);
@@ -37,4 +37,4 @@ const go_to_cart = async (req, res) => {
     }
 };
 
-export default go_to_cart;
+export default go_to_cart;
