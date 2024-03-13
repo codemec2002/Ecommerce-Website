@@ -1,17 +1,21 @@
 <div>
     <% categories.forEach(category => { %>
         <!-- render a page which will display few objects of a category -->
-        <div class="this-category-container">
-            <h1 class="this-category-name"> <%= category.category %> </h1>
+        <div class="this-category-container" style="display: flex; flex-wrap: wrap;">
+            <h1 class="this-category-name" style="width: 100%; text-align: center; margin-bottom: 10px;"> <%= category.category %> </h1>
             <% category.category_wise_name.forEach((product,name) => { %>
                 <!-- display the product in a div  -->
-                    <!-- we can access products of that particular id using name_products.id -->
-                    <a href="/<%= category.category %>/<%= name %>">
-                        <div class="product-card">
-                            <img src="uploads/<%= product[0].productImage.toString()%>" alt="Image" class="card-image">
-                            <p> <%= name %> </p>
-                        </div>
-                    </a>
+                <div style="margin: 10px; flex-basis: 20%; text-align: center;">
+                    <form action="/<%= category.category %>" method="POST">
+                        <input type="hidden" name="name" value="<%= name %>">
+                        <button type="submit" style="border: none; background: none; padding: 0; cursor: pointer;">
+                            <div class="product-card">
+                                <p style="margin-bottom: 5px;"> <%= name %> </p>
+                                <img src="uploads/<%= product[0].productImage.toString()%>" alt="Image" class="card-image" style="width: 190px; height: 190px; object-fit: cover;">
+                            </div>
+                        </button>
+                    </form>
+                </div>
             <% }); %>
         </div>
     <% }); %>

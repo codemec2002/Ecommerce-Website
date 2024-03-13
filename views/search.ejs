@@ -15,14 +15,15 @@
             <div class="product-box">
                 <div class="product-image">
                     <!-- Placeholder for product image -->
-                    <img src="uploads/<%= product.productImage.toString()%>" alt="Product Image">
+                    <img src="uploads/<%= producgitt.productImage.toString()%>" alt="Product Image">
                 </div>
                 <div class="product-details">
                     <h2><%= product.name %></h2>
                     <p>Price: <%= product.price %></p>
-                    <p>Quantity: <%= product.quantity %></p>
                     <p>Seller: <%= product.seller_email %></p>
+                    <p>Category: <%= product.category %> </p>
                     <div class="product-actions">
+                        
                         <button>Buy</button>
                         <a href="/add_to_cart?product=<%= JSON.stringify(product) %>">
                         <button>Add to Cart</button>
