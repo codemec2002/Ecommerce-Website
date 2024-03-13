@@ -23,6 +23,7 @@ import categoryProduct from "./src/category_products.js";
 import search from "./src/search.js";
 import add_to_cart from "./src/add_to_cart.js";
 import go_to_cart from "./src/cart.js";
+import buy_product from "./src/buy_product.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -86,6 +87,10 @@ app.post("/search", search);
 app.get("/add_to_cart", add_to_cart);
 
 app.get("/go_to_cart", go_to_cart);
+
+app.get("/buy_product", buy_product);
+
+app.post("/:category", search);
 
 // app.get("/:category/:name",name_wise_product);
 
