@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="/style/go_to_cart.css">
 </head>
+
 <body>
     <h1>Shopping Cart</h1>
     <div class="container">
         <div class="cart-items">
-            <% if (locals.cartList) { %> 
-                <%= console.log(cartList) %>
+            <% if (locals.cartList) { %>
                 <% cartList.forEach(item => { %>
                     <div class="product-row">
                         <div class="product-image">
                             <!-- Placeholder for product image -->
-                            <img src="uploads/<%= product.productImage.toString()%>" alt="Product Image">
+                            <img src="uploads/<%= item.res.productImage.toString()%>" alt="Product Image">
                         </div>
                         <div class="product-details">
                             <div class="product-info">
-                                <h2>Name: <%= item.product.name %></h2>
-                                <p>Price: <%= item.product.price %></p>
+                                <h2>Name: <%= item.res.name %></h2>
+                                <p>Price: <%= item.res.price %></p>
                             </div>
                             <div class="quantity-controls">
                                 <button class="decrease-quantity">-</button>
@@ -27,7 +28,7 @@
                                 <button class="increase-quantity">+</button>
                             </div>
                         </div>
-                    </div>                    
+                    </div>       
                 <% }); %>
             <% } %>
         </div>
@@ -42,6 +43,7 @@
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>
