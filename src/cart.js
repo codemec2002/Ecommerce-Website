@@ -21,7 +21,10 @@ const go_to_cart = async (req, res) => {
         if (cartList.length) {
             const productsPromises = cartList[0].products.map(async (pro) => {
                 const pro_res = await product.findById(pro.product);
-                return pro_res;
+                return {
+                    res : pro_res,
+                    quantity : pro.quantity
+                };
             });
             
             const cart_list = await Promise.all(productsPromises);
