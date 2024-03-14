@@ -24,6 +24,7 @@ import search from "./src/search.js";
 import add_to_cart from "./src/add_to_cart.js";
 import go_to_cart from "./src/cart.js";
 import updateProfile from "./src/update_profile.js";
+import buy_product from "./src/buy_product.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
@@ -95,6 +96,10 @@ app.get("/new",(req,res)=> {
     console.log(req.body);
     res.send("new");
 })
+
+app.get("/buy_product", buy_product);
+
+app.post("/:category", search);
 
 // app.get("/:category/:name",name_wise_product);
 

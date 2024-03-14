@@ -13,17 +13,25 @@ import { log } from "console";
     const add_to_cart = async (req, res) => {
         try {
             const Product = req.query.product ? JSON.parse(req.query.product) : null;
+            const quantity = 1;
             // console.log(Product);
             var id = Product._id;
             var session_mail = req.session.userData.email;
             var cart_res=await cartSchema.findOne({userEmail:session_mail});
             console.log(id);
             if(cart_res) {
-                cart_res.products.push({ product: id }); // added product id as object
+                const existingProductIndex = cart_res.products.findIndex(item => item.product.toString() === id); // checking prodcut already exist
+                if (existingProductIndex !== -1) {
+                    // If the product already exists in the cart, update the quantity
+                    cart_res.products[existingProductIndex].quantity += parseInt(quantity); // added product id as object
+                } else {
+                    // If the product doesn't exist, add it to the cart
+                    cart_res.products.push({ product: id, quantity: parseInt(quantity) });  // added product id as object
+                }
             } else {
                 cart_res = new cartSchema({
                     userEmail: session_mail,
-                    products: [{ product: id }]
+                    products: [{ product: id, quantity: parseInt(quantity) }]
                 });
             }
             await cart_res.save();
