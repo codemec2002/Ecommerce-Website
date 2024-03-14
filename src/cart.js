@@ -1,6 +1,6 @@
 import express from "express";
-import { fileURLToPath } from 'url';
-import path, { dirname } from 'path';
+import {fileURLToPath} from 'url';
+import path, {dirname} from 'path';
 import cartSchema from "./cart_schema.js";
 import product from "./product_schema.js";
 
@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 const go_to_cart = async (req, res) => {
     try {
         const userEmail = req.session.userData.email;
-        const cartList = await cartSchema.find({ userEmail: userEmail });
+        const cartList = await cartSchema.find({userEmail: userEmail});
         // const cart_list = cartList.products.forEach(async(pro) => {
         //     const list = await product.findById(pro.product);
         //     return list;
@@ -23,10 +23,10 @@ const go_to_cart = async (req, res) => {
                 const pro_res = await product.findById(pro.product);
                 return pro_res;
             });
-            
+
             const cart_list = await Promise.all(productsPromises);
-            res.render("go_to_cart.ejs",{
-                cartList:cart_list,
+            res.render("go_to_cart.ejs", {
+                cartList: cart_list,
             });
         } else {
             return res.send("NO Match");
@@ -37,4 +37,6 @@ const go_to_cart = async (req, res) => {
     }
 };
 
+
 export default go_to_cart;
+
