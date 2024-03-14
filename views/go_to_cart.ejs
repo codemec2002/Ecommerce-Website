@@ -6,25 +6,42 @@
 </head>
 <body>
     <h1>Shopping Cart</h1>
-    <div class="cart-items">
-        <% if(locals.cartList) { %>
-            <% cartList.forEach(product => { %>
-                <div class="product-row">
-                    <div class="product-details">
-                        <h2><%= product.name %></h2>
-                        <p>Price: <%= product.price %></p>
-                        <p>Quantity available: <%= product.quantity %></p>
-                        <p>Seller Email: <%= product.seller_email %></p>
-                        <div class="quantity-controls">
-                            <button class="decrease-quantity">-</button>
-                            <span class="quantity-added">0</span>
-                            <button class="increase-quantity">+</button>
+    <div class="container">
+        <div class="cart-items">
+            <% if (locals.cartList) { %> 
+                <%= console.log(cartList) %>
+                <% cartList.forEach(item => { %>
+                    <div class="product-row">
+                        <div class="product-image">
+                            <!-- Placeholder for product image -->
+                            <img src="uploads/<%= product.productImage.toString()%>" alt="Product Image">
                         </div>
-                    </div>
-                </div>
-            <% }); %>
-        <% } %>
+                        <div class="product-details">
+                            <div class="product-info">
+                                <h2>Name: <%= item.product.name %></h2>
+                                <p>Price: <%= item.product.price %></p>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="decrease-quantity">-</button>
+                                <span class="quantity-added"><%= item.quantity %></span>
+                                <button class="increase-quantity">+</button>
+                            </div>
+                        </div>
+                    </div>                    
+                <% }); %>
+            <% } %>
+        </div>
+        <div class="other-content">
+            <div class="subtotal">
+                <p>Subtotal (<span id="item-count">X</span> items): Rs <span id="total-price">Y</span> Rupees</p>
+            </div>
+            <div class="proceed-button">
+                <form action="/buy_product" method="get">
+                    <button type="submit"> Proceed to Buy </button>
+                </form>
+            </div>
+        </div>
     </div>
-    <button class="proceed-to-buy">Proceed to Buy</button>
+    
 </body>
 </html>
