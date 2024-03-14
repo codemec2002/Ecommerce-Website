@@ -23,10 +23,12 @@ import categoryProduct from "./src/category_products.js";
 import search from "./src/search.js";
 import add_to_cart from "./src/add_to_cart.js";
 import go_to_cart from "./src/cart.js";
+import updateProfile from "./src/update_profile.js";
 
 const app=express();
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
+app.use(express.json());
 const port=3000;
 
 // use session to store the email in session 
@@ -62,6 +64,8 @@ app.post("/",loginRoute.login_post);
 app.get("/signup",signupRoute.signup_get);
 app.post("/signup",signupRoute.signup_post);
 
+app.patch("/update_profile",updateProfile);
+
 app.get("/forgot_password",forgotPassRoute.forgotPass_get); 
 app.post("/forgot_password",forgotPassRoute.forgotPass_post);
 
@@ -86,6 +90,11 @@ app.post("/search", search);
 app.get("/add_to_cart", add_to_cart);
 
 app.get("/go_to_cart", go_to_cart);
+app.use(express.json());
+app.get("/new",(req,res)=> {
+    console.log(req.body);
+    res.send("new");
+})
 
 // app.get("/:category/:name",name_wise_product);
 

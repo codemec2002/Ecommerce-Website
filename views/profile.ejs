@@ -1,42 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/style/profile.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style/profile.css" />
     <title>Document</title>
 </head>
+
 <body>
-    <div><h1>Hello User</h1></div>
+    <header>
+        <div class="product-profile">
+            <% if(locals.isSeller=="true" ) { %>
+                <form action="/seller_product">
+                    <button>My products</button>
+                </form>
+                <!-- <form action="/sold_products" method="get">
+                    <button>Sold Products</button>
+                </form> -->
+                <% } %>
+                    <form action="/orders" method="get">
+                        <button>Orders</button>
+                    </form>
+                    <!-- <form action="/wish_list" method="get">
+                        <button>Wishlist</button>
+                    </form> -->
+                    <form action="/manage_address" method="get">
+                        <button>Manage Address</button>
+                    </form>
+        </div>
+        </section>
+    </header>
+    <div>
+        <h1>Hello <%= name %>
+        </h1>
+    </div>
     <div class="container">
         <section>
-            <div class="user-data">
-                <p class="user-details">Name: <%= name %></p>
-                <p class="user-details">Email: <%= email %></p>
-                <a href="">Edit</a> <!--redirect to edit info page--> 
-            </div>
-        </section>
-        <section>
-            <div class="product-profile">
-                <% if(locals.isSeller=="true") { %>
-                    <form action="/seller_product">
-                        <button>My products</button>
-                    </form>
-                    <form action="/sold_products" method="get">
-                        <button>Sold Products</button>
-                    </form>
-                <% } %>
-                <form action="/orders" method="get">
-                    <button>Orders</button>
-                </form>
-                <form action="/wish_list" method="get">
-                    <button>Wishlist</button>
-                </form>
-                <form action="/manage_address" method="get">
-                    <button>Manage Address</button>
-                </form>
-            </div>
+            <form id="user-info">
+                <div style="margin: 5px;">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" value=<%=name %> />
+                </div>
+                <div style="margin: 6px;">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value=<%=email %> />
+                </div>
+                <button style="margin-left: 90px;" id="form-btn" type="submit">Edit</button>
+            </form>
         </section>
     </div>
+    <script src="/scripts/profile.js"></script>
 </body>
+
 </html>
