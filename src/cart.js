@@ -28,6 +28,7 @@ const go_to_cart = async (req, res) => {
             });
 
             const cart_list = await Promise.all(productsPromises);
+            console.log(cart_list);
             res.render("go_to_cart.ejs", {
                 cartList: cart_list,
             });
