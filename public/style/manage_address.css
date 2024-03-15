@@ -23,12 +23,20 @@ h1 {
     margin: 10px 0;
 }
 
+
 .address-card {
     background-color: #fff;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin: 10px 0;
+    width: 80vw;
+    margin: 10px auto;
+}
+
+.first-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .dropdown-container {
