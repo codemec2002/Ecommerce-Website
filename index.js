@@ -25,7 +25,8 @@ import add_to_cart from "./src/add_to_cart.js";
 import go_to_cart from "./src/cart.js";
 import updateProfile from "./src/update_profile.js";
 import buy_product from "./src/buy_product.js";
-import { get_address, post_address , add_address , delete_address } from "./src/manage_address.js";
+import { get_address, post_address, add_address, delete_address } from "./src/manage_address.js";
+import { increase_quantity, decrease_quantity } from "./src/cart_quantity.js";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -92,7 +93,6 @@ app.post("/search", search);
 app.get("/add_to_cart", add_to_cart);
 
 app.get("/go_to_cart", go_to_cart);
-app.use(express.json());
 
 app.get("/manage_address", get_address);
 app.post("/manage_address", post_address);
@@ -103,6 +103,9 @@ app.post("/:category", search);
 
 app.get("/add_address", add_address);
 app.get("/delete_address/:ind", delete_address);
+
+app.patch("/increment", increase_quantity);
+app.patch("/decrement", decrease_quantity);
 
 // app.get("/:category/:name",name_wise_product);
 
