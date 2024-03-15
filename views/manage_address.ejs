@@ -1,29 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style/manage_address.css">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Manage Address</h1>
-    <input type="button" value="+ Add a new Address" class="input">
-    <% if(locals.address){ %>
-        <% for(var i=0;i<address.length;i++) {%>
+    <input type="button" value="+ Add a new Address" class="input" id="add_address">
+    <% if(locals.addresses){ %>
+        <% for(var i=0;i<addresses.length;i++) {%>
             <div class="address-card">
-                <p><%= address[i].name %></p>
-                <p><%= address[i].mobileNumber %></p>
-                <div class="dropdown-container">
-                    <button class="dropdown-btn"> <img src="/images/three-dots-vertical.svg" alt="3 dots"> </button>
-                    <div class="dropdown-content">
-                        <a href="/edit_address">Edit</a>
-                        <a href="/delete_address">Delete</a>
+                <div class="first-row">
+                    <p>
+                        <%= addresses[i].name %>
+                    </p>
+                    <div class="dropdown-container">
+                        <button class="dropdown-btn"> <img src="/images/three-dots-vertical.svg" alt="3 dots"> </button>
+                        <div class="dropdown-content">
+                            <!-- <a href="/edit_address">Edit</a> -->
+                            <a href="/delete_address/<%= i %>">Delete</a>
+                        </div>
                     </div>
                 </div>
-                <p><%= address[i].address %> , <%= address[i].landmark %> , <%= address[i].city %> , <%= address[i].state %> - <%= address[i].pincode %></p>
+                <p>
+                    <%= addresses[i].address %> , <%= addresses[i].landmark %> , <%= addresses[i].city %> , <%=
+                                    addresses[i].state %> - <%= addresses[i].pinCode %>
+                </p>
+                <p>
+                    <%= addresses[i].mobileNumber %>
+                </p>
             </div>
-        <% } %>
-    <% } %>
+            <% } %>
+                <% } %>
 </body>
+<script src="/scripts/manage_address.js"></script>
+
 </html>
