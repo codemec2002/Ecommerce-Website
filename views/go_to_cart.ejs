@@ -11,7 +11,8 @@
     <div class="container">
         <div class="cart-items">
             <% if (locals.cartList) { %>
-                <% cartList.forEach(item => { %>
+                <% cartList.forEach(item=> { %>
+                    <% console.log(item); %>
                     <div class="product-row">
                         <div class="product-image">
                             <!-- Placeholder for product image -->
@@ -19,18 +20,22 @@
                         </div>
                         <div class="product-details">
                             <div class="product-info">
-                                <h2>Name: <%= item.res.name %></h2>
-                                <p>Price: <%= item.res.price %></p>
+                                <h2>Name: <%= item.res.name %>
+                                </h2>
+                                <p>Price: <%= item.res.price %>
+                                </p>
                             </div>
                             <div class="quantity-controls">
-                                <button class="decrease-quantity">-</button>
-                                <span class="quantity-added"><%= item.quantity %></span>
-                                <button class="increase-quantity">+</button>
+                                <button id="decrease-quantity" product_id="<%= item.res._id %>">-</button>
+                                <span class="quantity-added">
+                                    <%= item.quantity %>
+                                </span>
+                                <button id="increase-quantity" product_id="<%= item.res._id %>">+</button>
                             </div>
                         </div>
-                    </div>       
-                <% }); %>
-            <% } %>
+                    </div>
+                    <% }); %>
+                        <% } %>
         </div>
         <div class="other-content">
             <div class="subtotal">
@@ -43,7 +48,7 @@
             </div>
         </div>
     </div>
-
+    <script src="/scripts/go_to_cart.js"></script>
 </body>
 
 </html>
