@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
 import user from "./schema.js"
-import seller from "./seller_schema.js";
+import { Seller } from "./seller_schema.js";
 import category_wise_name from "./get_category_name.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -24,7 +24,7 @@ const login_post = async(req,res)=> {
     // console.log(result);
     if(email && pass) {
         if(result && result.password==pass) {
-            const is_Seller= await seller.findOne({email:email});
+            const is_Seller= await Seller.findOne({email:email});
             var userEmail={email:email};
             req.session.userData=userEmail;
             if(is_Seller) {

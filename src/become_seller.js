@@ -1,7 +1,7 @@
 import express from "express";
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
-import seller from "./seller_schema.js";
+import { Seller } from "./seller_schema.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,14 +14,14 @@ const sellerSignUp_get = function(req,res) {
 
 const sellerSignUp_post = async(req,res)=> {
     const email=req.session.userData.email;
-    const is_seller= await seller.findOne({email:email});
+    const is_seller= await Seller.findOne({email:email});
     if(is_seller) {
         res.render("become_seller.ejs",{
             passMsg:"Already a Seller",
         });
     }
     if(req.body.aadhar && req.body.pan && req.body.gstNo) {
-        var newSeller = new seller ({
+        var newSeller = new Seller ({
             email: email,
             aadhar: req.body.aadhar,
             pan: req.body.pan,
