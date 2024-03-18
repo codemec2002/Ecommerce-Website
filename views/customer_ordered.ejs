@@ -10,10 +10,11 @@
     <h1>Your Orders History</h1>
     <div class="container">
         <div class="cart-items">
-            <% if (locals.cartList) { %>
+            <% console.log(orderList) %>
+            <% if (locals.orderList) { %>
                 <% var total_items = 0; %>
                 <% var total_price = 0; %>
-                <% cartList.forEach(item => { %>
+                <% orderList.forEach(item => { %>
                     <% total_items += item.quantity; %>
                     <% total_price += (item.quantity * item.res.price); %>
                     <div class="product-row">

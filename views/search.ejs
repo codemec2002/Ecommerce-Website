@@ -22,10 +22,11 @@
                     <p>Price: <%= product.price %></p>
                     <p>Seller: <%= product.seller_email %></p>
                     <p>Category: <%= product.category %> </p>
+                    <p>quantity: <%= product.quantity %> </p>
                     <div class="product-actions">
-                        <form action="/buy_product?product=<%= JSON.stringify(product) %>" method="get">
+                        <a href="/buy_product?product=<%= JSON.stringify(product) %>">
                             <button type="submit"> Buy </button>
-                        </form>
+                        </a>
                         <a href="/add_to_cart?product=<%= JSON.stringify(product) %>">
                         <button>Add to Cart</button>
                         </a>
