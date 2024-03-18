@@ -1,17 +1,51 @@
-import mongoose, { Schema } from "mongoose";
-import pkg from 'validator';
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-const {isEmail} = pkg;
-// mongoose.connect("mongodb://localhost:27017/ecommerce");
-mongoose.connect("mongodb+srv://hupenderkhatod:Hupender%40123@cluster0.yl15wtm.mongodb.net/");
-
-const sellerSchema = new mongoose.Schema({
-    email : String,
-    aadhar : Number,
-    pan : String,
-    gstNo : String
+const soldProductsSchema = new Schema({
+    productId: {
+        type: Schema.Types.ObjectId,
+        ref: 'products'
+    },
+    quantitySold: Number,
+    buyerEmail: String,
+    // Any other relevant information you want to store
 });
-sellerSchema.index({"email":"text"});
-const seller=mongoose.model("seller",sellerSchema);
 
-export default seller;
+const sellerSchema = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    aadhar: {
+        type: Number,
+        required: true,
+        unique: true
+    },
+    pan: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    gstNo: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    products: [{
+        type: Schema.Types.ObjectId,
+        ref: 'products'
+    }],
+    soldProducts: [{
+        type : Schema.Types.ObjectId,
+        ref : 'soldProductsSchema'
+    }]
+});
+
+const Seller = mongoose.model('Seller', sellerSchema);
+
+export default Seller;

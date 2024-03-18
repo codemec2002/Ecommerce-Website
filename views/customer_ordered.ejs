@@ -2,12 +2,12 @@
 <html>
 
 <head>
-    <title>Shopping Cart</title>
+    <title>Ordered History</title>
     <link rel="stylesheet" href="/style/go_to_cart.css">
 </head>
 
 <body>
-    <h1>Shopping Cart</h1>
+    <h1>Your Orders History</h1>
     <div class="container">
         <div class="cart-items">
             <% if (locals.cartList) { %>
@@ -26,11 +26,6 @@
                                 <h2>Name: <%= item.res.name %></h2>
                                 <p>Price: <%= item.res.price %></p>
                             </div>
-                            <div class="quantity-controls">
-                                <button id="decrease-quantity" product_id="<%= item.res._id %>">-</button>
-                                <span class="quantity-added"><%= item.quantity %></span>
-                                <button id="increase-quantity" product_id="<%= item.res._id %>">+</button>
-                            </div>
                         </div>
                     </div>
                 <% }); %>
@@ -40,14 +35,8 @@
             <div class="subtotal">
                 <p>Subtotal (<span id="item-count"><%= total_items %></span> items): Rs <span id="total-price"><%= total_price%></span> Rupees</p>
             </div>
-            <div class="proceed-button">
-                <form action="/buy_product" method="get">
-                    <button type="submit"> Proceed to Buy </button>
-                </form>
-            </div>
         </div>
     </div>
-    <script src="/scripts/go_to_cart.js"></script>
 </body>
 
 </html>
