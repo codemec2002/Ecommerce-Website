@@ -37,18 +37,12 @@ const sellerSchema = new Schema({
         product: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'products'
-        },
-        proQuantity : {
-            type : Number
         }
     }],
     soldProducts: [{
         soldProducts: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'soldProductsSchema1'
-        },
-        soldQuantity : {
-            type : Number
         }
     }]
 });
