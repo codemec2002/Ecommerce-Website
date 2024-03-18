@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import products from "./product_schema.js";
 import categorySchema from "./category_schema.js";
+import Seller from "./seller_schema.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -64,8 +65,9 @@ const addProducts_post = async (req, res) => {
             const product_res = await newProduct.save();
 
             var category_res = await categorySchema.findOne({
-                category: category,
+                category: category, 
             });
+
             if (category_res) {
                 category_res.products.push({ product: product_res._id });
             } else {
@@ -75,6 +77,7 @@ const addProducts_post = async (req, res) => {
                 });
             }
             await category_res.save();
+            
             res.send("successfully added");
         }
     } else {

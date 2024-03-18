@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Details</title>
+    <link rel="stylesheet" href="/style/seller_details.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Seller Details</h1>
+        <div class="seller-info">
+            <h2><%= seller.name %></h2>
+            <p>Email: <%= seller.email %></p>
+            <p>Aadhar: <%= seller.aadhar %></p>
+            <p>PAN: <%= seller.pan %></p>
+            <p>GST No: <%= seller.gstNo %></p>
+        </div>
+        <div class="product-info">
+            <h2>Products Added</h2>
+            <ul>
+                <% seller.products.forEach(product => { %>
+                    <li><%= product.name %> - <%= product.quantity %> units</li>
+                <% }); %>
+            </ul>
+        </div>
+        <div class="sold-info">
+            <h2>Products Sold</h2>
+            <ul>
+                <% seller.soldProducts.forEach(soldProduct => { %>
+                    <li><%= soldProduct.name %> - <%= soldProduct.quantitySold %> units</li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
