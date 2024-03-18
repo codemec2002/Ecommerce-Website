@@ -49,10 +49,6 @@ const addProducts_post = async (req, res) => {
             // If the product already exists for the seller, update its quantity
             existingProduct.quantity += parseInt(quantity, 10);
             await existingProduct.save();
-            Seller.updateOne(
-                {email : req.session.userData.email},
-                { $inc: { proQuantity: 1 } }
-                );
             res.send(
                 "Product already Present so quantity updated successfully"
             );
@@ -66,11 +62,10 @@ const addProducts_post = async (req, res) => {
                 quantity: quantity,
                 productImage: product_image,
             });
-            console.log(product_image);
+            // console.log(product_image);
             const product_res = await newProduct.save();
-
             var category_res = await categorySchema.findOne({
-                category: category, 
+                category: category,
             });
 
             if (category_res) {
@@ -82,14 +77,10 @@ const addProducts_post = async (req, res) => {
                 });
             }
             await category_res.save();
-
-            Seller.updateOne(
-                {email : req.session.userData.email},
-                {$push : {products : newProduct}}
+            await Seller.updateOne(
+                { email: req.session.userData.email },
+                { $push: { products: newProduct } }
             )
-
-            console.log(Seller);
-            
             res.send("successfully added");
         }
     } else {
