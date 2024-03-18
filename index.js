@@ -27,6 +27,8 @@ import updateProfile from "./src/update_profile.js";
 import buy_product from "./src/buy_product.js";
 import { get_address, post_address, add_address, delete_address } from "./src/manage_address.js";
 import { increase_quantity, decrease_quantity } from "./src/cart_quantity.js";
+import customer_ordered_product from "./src/customer_ordered_product.js";
+import seller_details from "./src/seller_details.js";
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -106,6 +108,10 @@ app.get("/delete_address/:ind", delete_address);
 
 app.patch("/increment", increase_quantity);
 app.patch("/decrement", decrease_quantity);
+
+app.get("/orders", customer_ordered_product);
+
+app.get("/seller_details", seller_details);
 
 // app.get("/:category/:name",name_wise_product);
 
