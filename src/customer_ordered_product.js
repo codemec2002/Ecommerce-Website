@@ -15,9 +15,10 @@ const customer_ordered_product = async (req, res) => {
 
     try {
         const userEmail = req.session.userData.email;
-        const orderList = await customerOrderSchema.find({userEmail: userEmail});
-        if (orderList.length) {
-            const productsPromises = orderList[0].products.map(async (pro) => {
+        const orderList = await customerOrderSchema.findOne({userEmail: userEmail});
+        // console.log(orderList.products + "   before   ");
+        if (orderList) {
+            const productsPromises = orderList.products.map(async (pro) => {
                 const pro_res = await product.findById(pro.product);
                 return {
                     res : pro_res,

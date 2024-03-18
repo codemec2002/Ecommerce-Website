@@ -4,7 +4,8 @@ import path, { dirname } from 'path';
 import product from "./product_schema.js";
 import customerOrderSchema from "./customer_order_schema.js";
 import cartSchema from "./cart_schema.js";
-import Seller from "./seller_schema.js";
+import { Seller } from "./seller_schema.js";
+import { soldProductsSchema } from "./seller_schema.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,33 +14,47 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const buy_product = async (req, res) => {
-    console.log(req.query);
+    
     try {
         // Check if the request body contains any data, indicating direct purchase without adding to cart
-        if (Object.keys(req.body).length > 0) {
+        if (req.query) {
             // When directly bought without adding to cart
             const Product = req.query.product ? JSON.parse(req.query.product) : null;
-            const quantity = 1;
+            const quant = 1;
             const productId = Product._id;
             const session_mail = req.session.userData.email;
             
             // Update seller details: Push sold product details to seller's soldProducts array
+            
+            console.log("before");
+            const soldProducts = new soldProductsSchema({
+                productId: productId, 
+                quantitySold: quant, 
+                buyerEmail: session_mail
+            });
+
+            await soldProducts.save();
+            
             await Seller.updateOne(
                 { email: Product.seller_email },
-                { $push: { soldProducts: { productId: productId, quantitySold: quantity, buyerEmail: session_mail } } }
+                { $push: {soldProducts : soldProducts}}
             );
+            
+            
 
             // Update product quantity: Reduce the quantity of the sold product
-            await product.findByIdAndUpdate(productId, { $inc: { quantity: -quantity } });
+            await product.findByIdAndUpdate(productId, { $inc: { quantity: -quant } });
+
+            console.log(req.query);
 
             // Update customer order schema: Add the purchased product to customer's order history
             let order_res = await customerOrderSchema.findOne({ userEmail: session_mail });
             if (order_res) {
-                order_res.products.push({ product: productId, quantity: parseInt(quantity) });
+                order_res.products.push({ product: productId, quantity: parseInt(quant) });
             } else {
                 order_res = new customerOrderSchema({
                     userEmail: session_mail,
-                    products: [{ product: productId, quantity: parseInt(quantity) }]
+                    products: [{ product: productId, quantity: parseInt(quant) }]
                 });
             }
             await order_res.save();
@@ -57,7 +72,7 @@ const buy_product = async (req, res) => {
 
                     // Print Seller details     
                     const sellerDetails = await Seller.findOne({ email: pro_res.seller_email });
-                    console.log("Seller Details:", sellerDetails);
+                    // console.log("Seller Details:", sellerDetails);
                     
                     // Update seller details: Push sold product details to seller's soldProducts array
                     await Seller.updateOne(
@@ -87,7 +102,7 @@ const buy_product = async (req, res) => {
         }
         res.send("products bought");
     } catch (error) {
-        console.log(error.message); // Log the error message
+        // console.log(error.message); // Log the error message
         res.status(500).send("Error occurred while processing the request.");
     }
 

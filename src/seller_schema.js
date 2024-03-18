@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const soldProductsSchema = new Schema({
+const soldProductsSchema1 = new Schema({
     productId: {
         type: Schema.Types.ObjectId,
         ref: 'products'
@@ -12,10 +12,7 @@ const soldProductsSchema = new Schema({
 });
 
 const sellerSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
+    
     email: {
         type: String,
         required: true,
@@ -37,15 +34,26 @@ const sellerSchema = new Schema({
         unique: true
     },
     products: [{
-        type: Schema.Types.ObjectId,
-        ref: 'products'
+        product: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'products'
+        },
+        proQuantity : {
+            type : Number
+        }
     }],
     soldProducts: [{
-        type : Schema.Types.ObjectId,
-        ref : 'soldProductsSchema'
+        soldProducts: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'soldProductsSchema1'
+        },
+        soldQuantity : {
+            type : Number
+        }
     }]
 });
 
 const Seller = mongoose.model('Seller', sellerSchema);
+const soldProductsSchema = mongoose.model('sold', soldProductsSchema1);
 
-export default Seller;
+export  {Seller, soldProductsSchema};

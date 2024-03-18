@@ -3,7 +3,8 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import products from "./product_schema.js";
 import categorySchema from "./category_schema.js";
-import Seller from "./seller_schema.js";
+import { Seller } from "./seller_schema.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,6 +49,10 @@ const addProducts_post = async (req, res) => {
             // If the product already exists for the seller, update its quantity
             existingProduct.quantity += parseInt(quantity, 10);
             await existingProduct.save();
+            Seller.updateOne(
+                {email : req.session.userData.email},
+                { $inc: { proQuantity: 1 } }
+                );
             res.send(
                 "Product already Present so quantity updated successfully"
             );
@@ -77,6 +82,13 @@ const addProducts_post = async (req, res) => {
                 });
             }
             await category_res.save();
+
+            Seller.updateOne(
+                {email : req.session.userData.email},
+                {$push : {products : newProduct}}
+            )
+
+            console.log(Seller);
             
             res.send("successfully added");
         }
