@@ -34,7 +34,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 // use session to store the email in session 
 app.use(cookieParser());
