@@ -14,8 +14,9 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const buy_product = async (req, res) => {
-    console.log(res.query);
-    if(res.query==undefined) {
+    
+    console.log(req.query);
+    if(req.query===undefined || req.query === null || req.query == {} || Object.keys(req.query).length === 0) {
         // When products are bought from the cart
         console.log("from cart");
         const userEmail = req.session.userData.email;
@@ -26,25 +27,41 @@ const buy_product = async (req, res) => {
                 // Find the product details from the product schema
                 const pro_res = await product.findById(pro.product);
 
-                // Print Seller details     
-                const sellerDetails = await Seller.findOne({ email: pro_res.seller_email });
-                // console.log("Seller Details:", sellerDetails);
+                const Product = pro_res;
+                const quant = pro_res.quantity;
+                const productId = pro_res._id;
+                const session_mail = req.session.userData.email;
 
-                // Update seller details: Push sold product details to seller's soldProducts array
+                const soldProducts = new soldProductsSchema({
+                    productId: pro_res._id,
+                    quantitySold: pro_res.quantity,
+                    buyerEmail: session_mail
+
+                });
+        
+                await soldProducts.save();
+        
+
+                // Print Seller details     
                 await Seller.updateOne(
-                    { email: pro_res.seller_email },
-                    { $push: { soldProducts: { productId: pro.product, quantitySold: pro.quantity, buyerEmail: userEmail } } }
+                    { email: Product.seller_email },
+                    { $push: { soldProducts: soldProducts } }
                 );
 
                 // Update product quantity: Reduce the quantity of the sold product
                 await product.findByIdAndUpdate(pro.product, { $inc: { quantity: -pro.quantity } });
 
                 // Update customer order schema: Add the purchased product to customer's order history
-                const customer_ordered_list = new customerOrderSchema({
-                    userEmail: userEmail,
-                    products: [{ product: pro.product, quantity: parseInt(pro.quantity) }]
-                });
-                await customer_ordered_list.save();
+                let order_res = await customerOrderSchema.findOne({ userEmail: session_mail });
+                if (order_res) {
+                    order_res.products.push({ product: productId, quantity: parseInt(quant) });
+                } else {
+                    order_res = new customerOrderSchema({
+                        userEmail: session_mail,
+                        products: [{ product: productId, quantity: parseInt(quant) }]
+                    });
+                }
+                await order_res.save();
 
                 return {
                     res: pro_res,

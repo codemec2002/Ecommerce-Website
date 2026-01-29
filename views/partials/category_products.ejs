@@ -94,7 +94,9 @@
                     <p>Quantity: <%= product.quantity %></p>
                     <p>Seller: <%= product.seller_email %></p>
                     <div class="product-actions">
-                        <button>Buy</button>
+                        <a href="/buy_product?product=<%= JSON.stringify(product) %>">
+                            <button type="submit"> Buy </button>
+                        </a>
                         <a href="/add_to_cart?product=<%= JSON.stringify(product) %>">
                             <button>Add to Cart</button>
                         </a>
